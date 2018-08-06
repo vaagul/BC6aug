@@ -15,11 +15,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         //OrderedMarkList();
-        List<Character> rack=Arrays.asList(new Character[]{'a','z','e','e','p','b','#'});
+        List<Character> rack=Arrays.asList(new Character[]{'A','Z','E','A','R','B','#'});
         List<String> sowpods=new ArrayList<>();
         sowpods=ScrambleUtils.getWordsFromDict();
         ScrambleScorer scrambleScorer=new ScrambleScorer(sowpods);
         System.out.println(scrambleScorer.getBestPossibleWord(rack));
+        Map<Integer,Character> constrains = new HashMap<>();
+        constrains.put(0,'A');
+        constrains.put(2,'S');
+        System.out.println(scrambleScorer.getBestPossibleWord(rack,constrains));
 
     }
 }
