@@ -17,7 +17,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        OrderedMarkList();
+        //OrderedMarkList();
+        //OUR AFTERNOON CODE GOES HERE SUCKER!!!
+        List<String> sowpods=new ArrayList<>();
+        sowpods=ScrambleUtils.getWordsFromDict();
 
     }
 }
