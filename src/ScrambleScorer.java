@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ScrambleScorer {
 
@@ -29,6 +26,26 @@ public class ScrambleScorer {
 
 
     private boolean isValidWord(String word, List<Character> rack){
+        List<Character> usableChars = new ArrayList<>(rack);
+
+        for(Character c : word.toCharArray()){
+            if(usableChars.contains(c)){
+                usableChars.remove(c);
+            }else if(usableChars.contains(BLANK)){
+                usableChars.remove(BLANK);
+            }else{
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean followsConstraint(String word, Map<Integer, Character> constraints){
+        for(Map.Entry<Integer, Character> entry : constraints.entrySet()){
+            if(word.charAt(entry.getKey()) != entry.getValue())
+                return false;
+        }
         return true;
     }
 
