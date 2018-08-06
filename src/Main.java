@@ -39,6 +39,8 @@ public class Main {
     public static void main(String[] args) {
         List<Student> studentsList=getFromFile("mark_data.txt");
         Map<String,List<String>> comparisonMap= StudentUtils.computeAllComparisons(studentsList);
+        Map<String,List<String>> reducedMap=StudentUtils.reduceComparisons(comparisonMap);
+        StudentUtils.printComparisons(reducedMap);
 
         //System.out.println("Hello World!");
     }
