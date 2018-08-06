@@ -16,12 +16,24 @@ public class ScrambleScorer {
         return 0;
     }
 
-    public List<ScrambleScorer> getPossibleWords(List<Character> rack){
-        return new ArrayList<>();
+    public List<String> getPossibleWords(List<Character> rack){
+        List<String> possibleWords=new ArrayList<>();
+        for(String sowpods:sowpodsList) {
+            if(isValidWord(sowpods,rack)) {
+                possibleWords.add(sowpods);
+            }
+        }
+        return possibleWords;
     }
 
-    public List<ScrambleScorer> getPossibleWprds(List<Character> rack, Map<Integer,Character> constraints){
-        return new ArrayList<>();
+    public List<String> getPossibleWords(List<Character> rack, Map<Integer,Character> constraints){
+        List<String> possibleWords=new ArrayList<>();
+        for(String sowpods:sowpodsList) {
+            if(isValidWord(sowpods,rack) && followsConstraint(sowpods,constraints)) {
+                possibleWords.add(sowpods);
+            }
+        }
+        return possibleWords;
     }
 
 
