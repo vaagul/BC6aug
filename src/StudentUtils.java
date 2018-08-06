@@ -1,17 +1,27 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StudentUtils {
     public static Map<String,List<String>> computeAllComparisons(List<Student> studentList){
-        return new HashMap<>();
+        Map<String,List<String>> comparisonMap= new HashMap<>();
+        List<String> singleList = new ArrayList<>();
+        for(int i=0;i<studentList.size();i++){
+            for(int j=0;j<studentList.size();j++){
+                if(studentList.get(i).compareTo(studentList.get(j)) == 1){
+                    singleList.add(studentList.get(j).getStudentId());
+                }
+            }
+            comparisonMap.put(studentList.get(i).getStudentId(),singleList);
+            singleList.clear();
+        }
+        return comparisonMap;
     }
 
-
-    public static Map<String,List<String>> reduceComparisons(Map<String,List<Student>> comparisionMap){
+    public static Map<String,List<String>> reduceComparisons(Map<String,List<Student>> comparisonMap){
         return new HashMap<>();
     }
-
 
     public static void printComparisons(Map<String,List<Student>> comparisionMap){
 
