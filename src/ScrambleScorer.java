@@ -62,10 +62,23 @@ public class ScrambleScorer {
     }
 
     public String getBestPossibleWord(List<Character> rack){
-        return new String();
+        List<String> possibleWords = getPossibleWords(rack);
+        int highestScore = 0;
+        String bestWord = "";
+
+        for(String s : possibleWords){
+            int score = evaluateScore(s);
+            if(score > highestScore){
+                highestScore = score;
+                bestWord = s;
+            }
+
+        }
+
+        return bestWord;
     }
 
-    public String getBestPossibleWord(List<Character> rack,Map<Integer,Character> constraints){
+    public String getBestPossibleWord(List<Character> rack, Map<Integer,Character> constraints){
         return new String();
     }
 
