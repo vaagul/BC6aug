@@ -1,9 +1,6 @@
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -15,12 +12,14 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //OrderedMarkList();
-        //OUR AFTERNOON CODE GOES HERE SUCKER!!!
+        List<Character> rack=Arrays.asList(new Character[]{'a','z','e','e','p','b','#'});
         List<String> sowpods=new ArrayList<>();
         sowpods=ScrambleUtils.getWordsFromDict();
+        ScrambleScorer scrambleScorer=new ScrambleScorer(sowpods);
+        System.out.println(scrambleScorer.getBestPossibleWord(rack));
 
     }
 }
