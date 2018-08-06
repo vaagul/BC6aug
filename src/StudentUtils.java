@@ -1,6 +1,41 @@
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 
 public class StudentUtils {
+
+
+
+    public static List<Student> getFromFile(String fname){
+        String line;
+        List<Student> StudentList=new ArrayList<>();
+
+        try {
+            InputStream fis = new FileInputStream("mark_data.txt");
+            InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+            BufferedReader br = new BufferedReader(isr);
+
+
+            while ((line = br.readLine()) != null) {
+                List<Integer> markList = new ArrayList<>();
+                String[] words = line.split(" ");
+                //student.setStudentId(words[0]);
+                for(int i=1;i<words.length;i++){
+                    markList.add(Integer.parseInt(words[i]));
+                }
+                Student student=new Student(words[0],markList);
+                StudentList.add(student);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return StudentList;
+    }
+
+
+
     public static Map<String,List<String>> computeAllComparisons(List<Student> studentList){
         Map<String,List<String>> comparisonMap= new HashMap<>();
         for(int i=0;i<studentList.size();i++){
