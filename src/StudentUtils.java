@@ -1,3 +1,6 @@
+import org.junit.jupiter.api.Test;
+import sun.jvm.hotspot.utilities.Assert;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +20,11 @@ public class StudentUtils {
             singleList.clear();
         }
         return comparisonMap;
+    }
+
+    @Test
+    public static void testSOmething(){
+
     }
 
     public static Map<String,List<String>> reduceComparisons(Map<String,List<Student>> comparisonMap){
