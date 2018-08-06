@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Student {
+public class Student implements Comparable<Student>{
     private String studentId;
     private List<Integer> marksList;
 
@@ -26,4 +26,8 @@ public class Student {
     }
 
 
+    @Override
+    public int compareTo(Student o) {
+        return 0;
+    }
 }
