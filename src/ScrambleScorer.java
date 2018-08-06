@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ScrambleScorer {
 
@@ -25,24 +22,69 @@ public class ScrambleScorer {
         return score;
     }
 
-    public List<ScrambleScorer> getPossibleWords(List<Character> rack){
-        return new ArrayList<>();
+    public List<String> getPossibleWords(List<Character> rack){
+        List<String> possibleWords=new ArrayList<>();
+        for(String sowpods:sowpodsList) {
+            if(isValidWord(sowpods,rack)) {
+                possibleWords.add(sowpods);
+            }
+        }
+        return possibleWords;
     }
 
-    public List<ScrambleScorer> getPossibleWprds(List<Character> rack, Map<Integer,Character> constraints){
-        return new ArrayList<>();
+    public List<String> getPossibleWords(List<Character> rack, Map<Integer,Character> constraints){
+        List<String> possibleWords=new ArrayList<>();
+        for(String sowpods:sowpodsList) {
+            if(isValidWord(sowpods,rack) && followsConstraint(sowpods,constraints)) {
+                possibleWords.add(sowpods);
+            }
+        }
+        return possibleWords;
     }
 
 
     private boolean isValidWord(String word, List<Character> rack){
+        List<Character> usableChars = new ArrayList<>(rack);
+
+        for(Character c : word.toCharArray()){
+            if(usableChars.contains(c)){
+                usableChars.remove(c);
+            }else if(usableChars.contains(BLANK)){
+                usableChars.remove(BLANK);
+            }else{
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean followsConstraint(String word, Map<Integer, Character> constraints){
+        for(Map.Entry<Integer, Character> entry : constraints.entrySet()){
+            if(word.charAt(entry.getKey()) != entry.getValue())
+                return false;
+        }
         return true;
     }
 
     public String getBestPossibleWord(List<Character> rack){
-        return new String();
+        List<String> possibleWords = getPossibleWords(rack);
+        int highestScore = 0;
+        String bestWord = "";
+
+        for(String s : possibleWords){
+            int score = evaluateScore(s);
+            if(score > highestScore){
+                highestScore = score;
+                bestWord = s;
+            }
+
+        }
+
+        return bestWord;
     }
 
-    public String getBestPossibleWord(List<Character> rack,Map<Integer,Character> constraints){
+    public String getBestPossibleWord(List<Character> rack, Map<Integer,Character> constraints){
         return new String();
     }
 
