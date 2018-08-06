@@ -13,7 +13,15 @@ public class StudentUtils {
     }
 
 
-    public static void printComparisons(Map<String,List<Student>> comparisionMap){
-
+    public static void printComparisons(Map<String,List<String>> comparisionMap){
+        Set<Entry<String,List<Student>>> entries = comparisonMap.entrySet();
+        for(Entry<String,List<String>> entry : entries) {
+            String key = entry.getKey();
+            List<String> studentIds = entry.getValue();
+            for(String studentId : studentIds) {
+                System.out.print(studentId+">"+key+" ");
+            }
+        System.out.println();
+        }
     }
 }
