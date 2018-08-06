@@ -24,7 +24,7 @@ public class ScrambleScorer {
     public List<String> getPossibleWords(List<Character> rack){
         List<String> possibleWords=new ArrayList<>();
         for(String sowpods:sowpodsList) {
-            if(computeWordValidation(sowpods,rack) > 0) {
+            if(computeWordValidation(sowpods,rack) >= 0) {
                 possibleWords.add(sowpods);
             }
         }
@@ -61,12 +61,32 @@ public class ScrambleScorer {
     }
 
     private boolean followsConstraints(String word, Map<Integer, Character> constraints){
-        for(Map.Entry<Integer, Character> entry : constraints.entrySet()){
-            if(word.length()>entry.getKey())
-            if(word.charAt(entry.getKey()) != entry.getValue())
-                return false;
+        int highestValue = 0;
+
+        for(Map.Entry<Integer, Character> entry : constraints.entrySet())
+            if(entry.getKey() > highestValue)
+                highestValue = entry.getKey();
+
+        int limit = word.length() - (highestValue + 1);
+
+        if(limit < 0)
+            return false;
+
+        for(int i = 0; i <= limit; i++) {
+            boolean flag = true;
+            for (Map.Entry<Integer, Character> entry : constraints.entrySet()) {
+                if (word.length() > entry.getKey())
+                    if (word.charAt(entry.getKey() + i) != entry.getValue()) {
+                        flag = false;
+                        break;
+                    }
+            }
+
+            if(flag)
+                return true;
         }
-        return true;
+
+        return false;
     }
 
     private String computeBestWordFromList(List<Character> rack, List<String> possibleWords) {

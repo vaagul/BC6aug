@@ -5,7 +5,7 @@ import java.util.List;
 public class ScrambleUtils {
     public static List<String> getWordsFromDict() throws IOException {
         ArrayList<String> extractedDict= new ArrayList<String>();
-        File sowpods=new File("/Users/vamm/IdeaProjects/BC4aug/sowpods.txt");
+        File sowpods=new File("./sowpods.txt");
         try {
             BufferedReader br= new BufferedReader(new FileReader(sowpods));
             String st;
