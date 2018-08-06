@@ -1,7 +1,9 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -36,7 +38,7 @@ public class Main {
     }
     public static void main(String[] args) {
         List<Student> studentsList=getFromFile("mark_data.txt");
-
+        Map<String,List<String>> comparisonMap= StudentUtils.computeAllComparisons(studentsList);
 
         //System.out.println("Hello World!");
     }
